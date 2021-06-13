@@ -1,0 +1,9 @@
+version: '2'
+services:
+  zcgsncms:
+    build: .
+    container_name: "SN_CMS"
+    ports:
+      - "22003:2003"
+    working_dir: "/var/zcg/sn_cms"
+    restart: always

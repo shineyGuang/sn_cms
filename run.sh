@@ -1,0 +1,1 @@
+docker run -d --name sn_cms  -v /root/sn_cms:/app --privileged=true  -p 8001:80 sn_cms_image
