@@ -145,6 +145,7 @@ class ResponseMessage(object):
     DelRobotFailed = "要删除的机器人已存在"
     # 类别
     CategoryNotExistErr = "要更新的类别不存在"
+    CategoryIsExistErr = "要创建的类别已存在"
     DelCategorySuccess = "删除类别成功"
     DelCategoryFailed = "删除类别失败"
 
