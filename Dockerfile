@@ -1,13 +1,24 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+FROM python:3.8
 
-EXPOSE 8001/tcp
+LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
 
-RUN mkdir -p /root/.pip/ &&\
-    mkdir -p /logs
+RUN pip install --no-cache-dir "uvicorn[standard]" gunicorn
 
-WORKDIR /app
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
+COPY ./gunicorn_conf.py /gunicorn_conf.py
+
+COPY ./start-reload.sh /start-reload.sh
+RUN chmod +x /start-reload.sh
 
 COPY . /app
-COPY ./pip.conf /root/.pip/
+WORKDIR /app/
 
-RUN pip install gunicorn && pip install --no-cache-dir -r requirements.txt
+ENV PYTHONPATH=/app
+
+EXPOSE 80
+
+# Run the start script, it will check for an /app/prestart.sh script (e.g. for migrations)
+# And then will start Gunicorn with Uvicorn
+CMD ["/start.sh"]

@@ -7,5 +7,5 @@ echo "
 # Let the DB start
 sleep 10;
 # Run migrations
-aerich upgrade
+aerich upgrade head
 "

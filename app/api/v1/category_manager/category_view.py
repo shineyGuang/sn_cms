@@ -26,7 +26,7 @@ async def get_all_category():
 @category_manager_router.post("/category/createOneCry", dependencies=[Depends(get_current_user)],
                               response_model=ResponseBaseModel, response_model_exclude_unset=True, summary="创建一个类别")
 async def create_category(category: CategoryModel):
-    await Curd(CategoryInfo).create(category.dict(), category_id=uuid.uuid4())
+    await Curd(CategoryInfo).create(**category.dict(), category_id=uuid.uuid4())
     return ResponseBaseModel(statusCode=ResponseCode.HTTP_200_OK, msg=ResponseMessage.Success)
 
 
